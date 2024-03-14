@@ -1,18 +1,28 @@
 <?php
   ob_start();
   include_once $_SERVER['DOCUMENT_ROOT'].'/config/main.php'; 
-  buildHeader();
+  pageBuilder::buildHeader();
   $Guest_Name = "Guest".rand(1, 9999);
-  $FindGames = $pdo->prepare('select gameName,gameDesc,port,gameIp,owner,client from games where gameId="'.$_GET['id'].'"');
+  $FindGames = $pdo->prepare('select * from games where gameId="'.$_GET['id'].'"');
   $FindGames->execute();
   $gametype = null;
-
+  if(!isset($_SESSION['logged_in'])){
+	
+}else{
+extract($_SESSION['userData']);
+}
+  if(isset($_SESSION['logged_in'])){
+	$username = ($name);
+  }
+  //if ($_SERVER["HTTP_USER_AGENT"], "ROBLOX Android App") == true){
+	//  header("Location: /games/list");
+  //}
   $row = $FindGames->fetchAll(PDO::FETCH_ASSOC)[0];
-  if($row["client"] != "2015"){
-    $gametype = "join2016()";
+  if($row["client"] == 2015){
+    $gametype = "join()";
     }else{
-      $gametype = "join()";
-        }
+      $gametype = "join2016()";
+	}
     //exit($gametype . "working on 2016 games");
   if (!isset($row["gameName"]))
   {
@@ -34,168 +44,85 @@
 </title>
     
 <body data-bs-theme="dark">
-        <noscript><div class="SystemAlert"><div class="SystemAlertText">Please enable Javascript to use all the features on this site.</div></div></noscript>
-        
-        
-        
-                    <center>
-        <div id="BodyWrapper">
-            <div class="main container" style="width:900px">
-              <div class="card">
+
+                <div class="card mx-auto" style="
+    width: 50rem;
+">
   <div class="card-body">
 
-            <div id="RepositionBody">
-                <div id="Body" style="width:970px;">
-                    
-   
-</div>
-        </div>
-
-        
-        
-
-<div id="Item" class="place-item redesign body">
-    <div class="item-header">
-        <h1 class="notranslate"><?php echo $row['gameName']; ?></h1>
-        <h4>By: <?php echo $row['owner']?></h4>
-        
-        
-    </div>
-    <div class="left-column">
-        <div class="item-media">
-        <style type="text/css">
-        .youTubeVideoOverlay
-        {
-            position:absolute;
-            top:0px;
-            left:0px;
-            width: 120px;
-            height: 70px;
-            z-index:5;
-            cursor: pointer;
-            background: white;
-            opacity: 0.0;
-            filter: alpha(opacity=0.0);
-        }
-        .SelectedYouTubeGalleryIcon
-        {
-            top: -3px;
-            margin: 2px !important;  /** !important makes sure we override the margin in divSmallGalleryItem **/
-            border: 3px solid black; /** If you change this border size, you need to change the margin, as well as the top value **/
-        }
-        .RemoveYouTubeGalleryImage
-        {
-            cursor: pointer;
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            z-index: 6; /** Make sure this is higher than z-index of youTubeVideoOverlay **/
-        }
-        .divSmallGalleryItem
-        {
-            height: 70px;
-            width: 120px;
-            float: left;
-            position:relative;
-            margin: 5px;
-        }
-        #divSmallGalleryItemBox
-        {
-            width: 500px;
-            height:100px;
-            position:relative;
-            overflow-x: auto;
-            overflow-y: hidden;
-        }
-        #divSmallGalleryScrollContainer
-        {
-            margin: 0px auto;
-            margin-top: 5px;
-            margin-bottom: 5px; /** Allows for scroll bar **/
-            display: inline-block;
-            width: 0px;
-            *display:inline;
-            *zoom:1;
-        }
-        .smallGalleryThumbItem
-        {
-            float: left;
-        }
-        </style>
-
-        <div style="margin: 0px auto; width: 500px">
-        <div id="ItemThumbnail" style="height:280px; width: 500px">
-        <div id="bigGalleryThumbItem" style="position: absolute;">
-            <a id="ctl00_cphRoblox_NewGamePageControl_RichMediaThumbDisplay_rbxGalleryAssetThumbnail_rbxAssetImage" class=" notranslate" title="<?php echo $row['gameName'] ?>" class=" notranslate" onclick="__doPostBack('ctl00$cphRoblox$NewGamePageControl$RichMediaThumbDisplay$rbxGalleryAssetThumbnail$rbxAssetImage','')" style="display:inline-block;height:280px;width:500px;cursor:pointer;"><img src="/images/Unnaproved.png" height="280" width="500" border="0" onerror="return Roblox.Controls.Image.OnError(this)" alt="<?php echo $row['gameName'] ?>" class=" notranslate"/></a>
-
-
-
-
-            </div>
-            </div>
-                
-
-    
-
-    
-
-</div>
-
-
-
             
-        </div>
+    <div class="col-md-9"><h1><?php echo $row['gameName']; ?></h1><h3>by <?php echo $row['owner']?></h3></div>
+        
+        
 
-            <div class="clear"></div>
+
+    
+        
+        
+    <div class="mx-auto col-sm-7"><img src="https://cdn.rb15.us.to/1bc0eecbf9203e4e6aaf81a7ca635c62.png" alt="Game Image" title="Game Image" class="img-fluid"></div><div class="mx-auto col-sm-7"><br>
+    
+    <div class="row"> <div class="col-sm-6 text-center"><h5>Description</h5> <p><?php echo $row['gameDesc'] ?></p></div><div class="col-sm-6 text-center"><style>.checked { color: orange; }</style><h5>Rating</h5> 
+<div id="stars"><span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span></div>
 
 
-</div>
-            </span>
-        </div>
-    <hr>
-        <div class="description notranslate">
-                <p>Description: </p>
-            <div id="DescriptionText" class="invisible"><?php echo $row['gameDesc'] ?></div>
-            <pre id="PlaceDescription" class="body linkify"><span class="place-description-content"><?php echo $row['gameDesc'] ?></span><span class="more-holder"></span></pre>
-        </div>
-        <div class="facebook-like">
-                
-        </div>
-    </div>
-    <div class="right-column">
-        <div class="builder divider-bottom">
-          <div class="builder-image">
-              
-              <div class="roblox-avatar-image" data-user-id="1" data-image-size="tiny"></div>
-              
-          </div>
-      <div class="buttons">
-          <div id="VisitButtonContainer">
-              
-              <div class="VisitButtonsLeft ">
 <script defer>
               //const gameIp = "<?= $row['gameIp'] ?>";
               const placeId = <?= $_GET['id'] ?>;
               //const port = <?= $row['port'] ?>; // old systems
-              //const username = "<?= $Guest_Name ?>";
+	    <?php
+		//hopefully this works..
+	    if(isset($_SESSION['user'])){ // meanwhile, we are not using the Cookie, since its broken. asked one of the team and no one did respond. so i'll use the older method sadly.
+			echo('const username = "'.urlencode($_SESSION['user']['username']).'";');
+			echo('const userid = "'.$_SESSION['user']['id'].'";');
+		echo' ';
+		echo'	
+        function join() {
+              const placeLauncher = `https%3A%2F%2Fwww.rb15.us.to%2Fgame%2FPlaceLauncher.ashx%2F%3FplaceId%3D${placeId}%26username%3D${username}%26id%3D${userid}`;
+              const joinArgs = `rblx15-player-rb15:1+launchmode:play+gameinfo:'.time().'+launchtime:17020401369379+placelauncherurl:${placeLauncher}+browsertrackerid:197870394468`;
+              window.location.href = joinArgs;
+        }
+		
+					
+        function join2016() {
+              const placeLauncher = `https%3A%2F%2Fwww.rb15.us.to%2Fgame%2FPlaceLauncher.ashx%2F%3FplaceId%3D${placeId}%26username%3D${username}%26id%3D${userid}`;
+              const joinArgs = `rblx16-player-rb15:1+launchmode:play+gameinfo:'.time().'+launchtime:17020401369379+placelauncherurl:${placeLauncher}+browsertrackerid:197870394468`;
+              window.location.href = joinArgs;
+        }
+		';
+		}else{
+			echo'	
         function join() {
               const placeLauncher = `https%3A%2F%2Fwww.rb15.us.to%2Fgame%2FPlaceLauncher.ashx%2F%3FplaceId%3D${placeId}`;
               const joinArgs = `rblx15-player-rb15:1+launchmode:play+gameinfo:0+launchtime:17020401369379+placelauncherurl:${placeLauncher}+browsertrackerid:197870394468`;
               window.location.href = joinArgs;
         }
+		
+					
           function join2016() {
               const placeLauncher = `https%3A%2F%2Fwww.rb15.us.to%2Fgame%2FPlaceLauncher.ashx%2F%3FplaceId%3D${placeId}`;
-              const joinArgs = `rblx15-player-rb16:1+launchmode:play+gameinfo:0+launchtime:17020401369379+placelauncherurl:${placeLauncher}+browsertrackerid:197870394468`;
+              const joinArgs = `rblx16-player-rb15:1+launchmode:play+gameinfo:0+launchtime:17020401369379+placelauncherurl:${placeLauncher}+browsertrackerid:197870394468`;
               window.location.href = joinArgs;
         }
+		';
+		}
+		?>
 </script>
-            
-
-             <button class="float-left submit-button btn btn-primary" data-bs-toggle="modal" onclick="<?= $gametype ?>"  data-bs-target="#exampleModal">Play</button>
-                <br>
-                <hr>
-                
-                                  </center>
+<div class="text-center"> 
+<?php
+echo'
+<button onclick="'.$gametype.'" class="btn btn-success me-md-3">Play</button>
+'; 
+			 if(isset($_SESSION['logged_in'])){ 
+			 if($row['ownerid'] == $discord_id){
+				 echo('<a class="btn btn-primary" href="/edit.php?id='.$_GET['id'].'">Edit</a>'); 
+				 }
+				 } /* lmao, i did this on my phone */ 
+				 ?></div></div></div>
+    </div>
 
 
 
@@ -206,8 +133,8 @@
       <div class="modal-header">
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <center>Requesting Server...</center>
+      <div class="modal-body text-center">
+        Requesting Server...
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <br><br><br><br>
         <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
@@ -246,5 +173,5 @@
        </div>  </div></div>    
 </html>
   <?php
-  buildFooter();
+  pageBuilder::buildFooter();
   ?>

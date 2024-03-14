@@ -1,1 +1,1 @@
-http://www.rb15.us.to/Asset/BodyColors.ashx?userId=1;http://www.rb15.us.to/asset?id=63690008&version=1;http://www.rb15.us.to/asset?id=585442799;
+http://www.rb15.us.to/Asset/BodyColors.ashx?userId=1;http://www.rb15.us.to/Asset/417457461

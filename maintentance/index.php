@@ -16,9 +16,9 @@
    header("Location: /");
    exit();
   }
-  if (isset($_GET["pass"]))
+  if (isset($_POST["pass"]))
   {
-    if ($_GET["pass"] == config["site"]["key"])
+    if ($_POST["pass"] == config["site"]["key"])
     {
       session_start();
       echo "kewl!";
@@ -103,14 +103,14 @@
         <img src="https://rb15.us.to/images/errors/img_ohnoes.png" alt="We're making things more awesome. Be back soon.">
     </div>
         <div class="content">
-        <p>We're making things more awesome. Be back soon.</p> 
+        <p>We're making things more awesome. Be back soon.</p>
           <i class="fa-solid fa-timer count-down"></i><div id="countDown" class="count-down">
         </div>
       <br>
     </div>
     <script>
 // Set the date we're counting down to
-var countDownDate = new Date("Feb 17, 2024 15:37:25").getTime();
+var countDownDate = new Date("Mar 2, 2024 21:24:25").getTime();
 
 // Update the count down every 1 second
 var x = setInterval(function() {
@@ -134,13 +134,13 @@ var x = setInterval(function() {
   // If the count down is over, write some text 
   if (distance < 0) {
     clearInterval(x);
-    document.getElementById("countDown").innerHTML = "maintentance is over";
+    document.getElementById("countDown").innerHTML = "Back on Track. Please refresh the page to return back to RBLX15."; 
   }
 }, 1000);
 </script>
         </div>
     </div>
-    <form method="GET" action=""><input id="pass" for="pass" name="pass" type="password"></input><input type="submit"></input></form>
+    <form method="POST" action=""><input id="pass" for="pass" name="pass" type="password"></input><input type="submit"></input></form>
 <br></br>
 
 </body></html>

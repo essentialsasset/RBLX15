@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     mysqli_close($conn);
 }
   include_once $_SERVER['DOCUMENT_ROOT'].'/config/main.php';
-  buildHeader();
+  pageBuilder::buildHeader();
 
 ?>
 
@@ -97,5 +97,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </body>
 </html>
   <?php
-  buildFooter();
+  pageBuilder::buildFooter();
   ?>

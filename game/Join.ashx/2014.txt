@@ -347,12 +347,12 @@ local success, err = pcall(function()
   client.Ticket = ""  
   ifSeleniumThenSetCookie("SeleniumTest2", "Successfully connected to server")
   
-  playerConnectSucces, player = pcall(function() return client:PlayerConnect(0, "%serverip%", %serverport%, 0, threadSleepTime) end)
+  playerConnectSucces, player = pcall(function() return client:PlayerConnect(%id%, "%serverip%", %serverport%, 0, threadSleepTime) end)
   if not playerConnectSucces then
     --Old player connection scheme
-    player = game:GetService("Players"):CreateLocalPlayer(0)
+    player = game:GetService("Players"):CreateLocalPlayer(%id%)
     analytics("Created Player")
-    client:Connect("½serverip1½", %serverport1%, 0, threadSleepTime)
+    client:Connect("%serverip%", %serverport%, 0, threadSleepTime)
   else
     analytics("Created Player")
   end
@@ -373,8 +373,8 @@ local success, err = pcall(function()
     end)
   end
 
-  player:SetSuperSafeChat(true)
-  pcall(function() player:SetUnder13(true) end)
+  player:SetSuperSafeChat(false)
+  pcall(function() player:SetUnder13(false) end)
   pcall(function() player:SetMembershipType(Enum.MembershipType.None) end)
   pcall(function() player:SetAccountAge(0) end)
   player.Idled:connect(onPlayerIdled)

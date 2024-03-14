@@ -1,6 +1,6 @@
 <?php
   include_once $_SERVER['DOCUMENT_ROOT'].'/config/main.php';
-  buildHeader();
+  pageBuilder::buildHeader();
   ?>
 
   <main class="pt-5 container">

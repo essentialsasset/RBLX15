@@ -1,17 +1,14 @@
+ErrorDocument 403 /errors/403/
 ErrorDocument 404 /errors/404/
 ErrorDocument 500 /errors/500/
 # dont change anythin bellow
 RewriteEngine On
-RewriteCond %{THE_REQUEST} /([^.]+)\.php [NC]
-RewriteRule ^ /%1 [NC,L,R]
-RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule ^(.*)$ $1.php  [NC,L]
-RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
-RewriteRule ^ /%1 [NC,L,R]
-RewriteCond %{REQUEST_FILENAME}.html -f
-RewriteRule ^(.*)$ $1.html  [NC,L]
+
 Options -Indexes
 RewriteRule ^Game(/(.*))?$ /game$1 [NC,L,R=301]
 RewriteRule ^Games.aspx(/(.*))?$ /games$1 [NC,L,R=301]
-deny from 176.131.7.250 2a0e:97c0:3e3:295::1
-# deny from 46.3.80.6
+RewriteRule ^game/players/([^/]+)/?$ user-stuff.php?userId=$1 [L]
+# ip bans
+deny from 2806:104e:11:db7a:b072:28a2:29f4:6aee
+deny from 186.251.129.196
+deny from 202.60.82.127

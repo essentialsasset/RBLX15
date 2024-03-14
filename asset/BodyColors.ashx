@@ -9,7 +9,7 @@
 <string name="Name">Body Colors</string>
 <int name="RightArmColor">1003</int>
 <int name="RightLegColor">1003</int>
-<int name="TorsoColor">1003</int>
+<int name="TorsoColor">199</int>
 <bool name="archivable">true</bool>
 </Properties>
 </Item>
