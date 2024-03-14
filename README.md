@@ -1,6 +1,6 @@
 <p align="center">
   <img src="https://github.com/essentialsasset/RBLX15/blob/main/images/Unnaproved.png" alt="rblx15" width="250" align="center">
-# RBLX15: How NOT to make a Revival.
+> RBLX15: How NOT to make a Revival.
 
 
 ## How To
